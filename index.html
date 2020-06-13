@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rock, Paper and Scissors JS game</title>
+ <script>
+  let playerSelection = "",
+  computerSelection = "",
+  counter = 0,
+  winner = "";
+
+
+
+function play() {
+
+  // Computer's turn
+
+  function computerPlay() 
+  {
+    let random = Math.floor(Math.random() * 3) + 1;
+    let computerSelection = "";
+    (random == 1) ? computerSelection = "rock" : 
+    (random == 2) ? computerSelection = "paper" : computerSelection = "scissors"
+    return computerSelection;
+  }
+
+  // Rules
+  function playRound(playerChoice, computerChoice)
+  {
+    let OneRound = "";
+    (playerChoice == computerChoice) ? OneRound = "You tied" : "";
+
+
+    if (playerChoice == "rock" && computerChoice == "paper") {      OneRound = "You lost, paper beats rock.";
+      --counter;
+    } else if (playerChoice == "rock" && computerChoice == "scissors") {      OneRound = "You won! Rock beats scissors!";
+      ++counter;
+    } else if (playerChoice == "paper" && computerChoice == "rock") {      OneRound = "You won! Paper beats rock!";
+      ++counter;
+    } else if (playerChoice == "paper" && computerChoice == "scissors") {      OneRound = "You lost, scissors beat paper.";
+      --counter;
+    } else if (playerChoice == "scissors" && computerChoice == "rock") {      OneRound = "You lost, rock beats scissors.";
+      --counter;
+    } else if (playerChoice == "scissors" && computerChoice == "paper") {      OneRound = "You won! Scissors beat paper!";
+      ++counter;
+    }
+    return OneRound;
+  }
+
+  // loop
+
+  for (i = 0; i != 5; i++) {
+    playerSelection = prompt("Choose: rock, paper or scissors").toLowerCase();
+    computerSelection = computerPlay();
+
+    if (
+      playerSelection == "rock" ||
+      playerSelection == "paper" ||
+      playerSelection == "scissors"
+    ) {
+      alert("The computer has " + computerSelection);
+      alert(
+        playRound(playerSelection, computerSelection)
+        );
+    } 
+
+    else {
+      alert("Please try only with Rock, Paper or Scissors.");
+      i -= 1;
+    }
+  }
+
+
+// final record via ternary where counter is a diference and must be positive to win.
+  alert
+  (`${(counter > 0) ? "You won the whole game!" : (counter < 0) ? "You have lost the game, sorry." : "This is a tie! Play again."}`);
+}
+
+play();
+
+</script>
+  </head>
+  <body>
+   
+  </body>
+</html>
